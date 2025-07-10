@@ -19,9 +19,68 @@
 //           v: A reference to the vector to analyze.
 // Returns: A boolean value: True for bitonic sequences, false otherwise.
 bool is_bitonic(const std::vector<int> &v){
+    if (v.size() < 2) return true;
+    bool rising = false;
+    int counter = 0;
+    int sizeOfVector = v.size() - 1;
     
     // Write your code here
+    while (counter < sizeOfVector && v[counter] == v[counter + 1])
+    {
+        counter ++;
+    }
+    if (counter == sizeOfVector)
+    {
+        return true;
+    }
 
+    if (v[counter] < v[counter + 1])
+    {
+        while (counter < sizeOfVector && v[counter] <= v[counter + 1])
+        {
+            counter ++;
+        }
+    }else
+    {   
+        while (counter < sizeOfVector && v[counter] >= v[counter + 1])
+        {
+            counter ++;
+        }
+    }
+    if (counter == sizeOfVector)
+    {
+        return true;
+    }
+    
+    if (v[counter] < v[counter + 1])
+    {
+        rising = true;
+        while (counter < sizeOfVector && v[counter] <= v[counter + 1])
+        {
+            counter ++;
+        }
+    }else
+    {   
+        while (counter < sizeOfVector && v[counter] >= v[counter + 1])
+        {
+            counter ++;
+        }
+    }
+    if (counter < sizeOfVector)
+    {
+        return false;
+    }
+    
+    if (rising && v[counter] <= v[0])
+    {
+        return true;
+    }
+    
+    if (!rising && v[counter] >= v[0])
+    {
+        return true;
+    }
+    
     return false;
 }
 
