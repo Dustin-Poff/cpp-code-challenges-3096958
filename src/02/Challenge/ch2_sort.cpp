@@ -17,8 +17,26 @@
 bool sort_array(int *arr, int n){
 
     // Write your code here
-
-    return false;
+    if (arr == NULL)
+        return false;
+    if (n < 2)
+        return true;
+    
+    for (size_t i = 0; i < n; i++)
+    {
+        int swap_position = i;
+        for (size_t j = i; j < n; j++)
+        {
+            if (arr[swap_position] > arr[j])
+            {
+                swap_position = j;
+            }
+        }
+        std::swap(arr[i], arr[swap_position]);
+        
+    }
+    
+    return true;
 }
 
 // Main function
