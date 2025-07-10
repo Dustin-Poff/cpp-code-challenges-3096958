@@ -9,7 +9,7 @@
 
 void FizzBuzz(const int userNumber)
 {
-    for (size_t i = 0; i <= userNumber; i++)
+    for (size_t i = 1; i <= userNumber; i++)
     {
         if ((i % 3 == 0) && (i % 5 == 0))
         {
