@@ -7,15 +7,40 @@
 
 #include <iostream>
 
+void FizzBuzz(const int userNumber)
+{
+    for (size_t i = 0; i <= userNumber; i++)
+    {
+        if ((i % 3 == 0) && (i % 5 == 0))
+        {
+            std::cout << i << " is a " << "Fizz Buzz" << std::endl;
+        }
+        else if (i % 3 == 0)
+        {
+            std::cout << i << " is a "  << "Fizz" << std::endl;
+        }
+        else if (i % 5 == 0)
+        {
+            std::cout << i << " is a "  << "Buzz" << std::endl;
+        }
+    }
+    
+};
+
 // FizzBuzz, main()
 // Summary: This application runs on the main function.
 int main(){
     int n; // How many numbers to include in the sequence.
     
-    std::cout << "Enter a positive integer: " << std::flush;
-    std::cin >> n;
+    do
+    {
+        std::cout << "Enter a positive integer: " << std::flush;
+        std::cin >> n;
+    } while (isdigit(n) and n >= 0);
+    
 
     // Write your code here
+    FizzBuzz(n);
     
     std::cout << std::endl << std::flush;
     return 0;
