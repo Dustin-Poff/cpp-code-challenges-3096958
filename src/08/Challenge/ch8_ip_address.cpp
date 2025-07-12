@@ -16,24 +16,24 @@
 // Arguments:
 //           ip: The string to analyze with a potential ip address.
 // Returns: A boolean value. True for valid ip addresses, false otherwise.
-bool is_valid_ip(std::string ip){
+std::vector<std::string> get_tokens(std::string ip)
+{
     std::vector<std::string> parsedTokens;
-    std::string ipTemp = ip;
     std::string parsingChar = ".";
-    int position = ipTemp.find(parsingChar);
-    size_t i = 0;
-
-    while(position != ipTemp.npos)
+    int position;
+    do 
     {
-        parsedTokens.push_back(ipTemp.substr(0, position));
-        ipTemp.erase(0, position + parsingChar.length());
-        position = ipTemp.find(parsingChar);
-        if (position == ipTemp.npos)
-        {
-            parsedTokens.push_back(ipTemp.substr(0, position));
-        }
+        position = ip.find(parsingChar);
+        parsedTokens.push_back(ip.substr(0, position));
+        ip.erase(0, position + parsingChar.length());
         
-    }
+    }while(position != ip.npos);
+    return parsedTokens;
+}
+
+int ip_checks(std::vector<std::string> parsedTokens)
+{
+    size_t i = 0;
     if (parsedTokens.size() == 4)
     {
         while (i < parsedTokens.size() && all_of(parsedTokens[i].begin(), parsedTokens[i].end(), ::isdigit))
@@ -45,13 +45,20 @@ bool is_valid_ip(std::string ip){
             i++;
         }
     }
-    if (i == parsedTokens.size())
+    return i;
+}
+
+bool is_valid_ip(std::string ip){
+    std::vector<std::string> parsedTokens = get_tokens(ip);
+
+    if (ip_checks(parsedTokens) == parsedTokens.size())
     {
         return true;
     }
     
     return false;
 }
+
 
 // Main function
 int main(){
