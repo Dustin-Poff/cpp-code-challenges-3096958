@@ -7,6 +7,7 @@
 // All numbers between 0 and 255.
 
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <string>
 
@@ -16,9 +17,39 @@
 //           ip: The string to analyze with a potential ip address.
 // Returns: A boolean value. True for valid ip addresses, false otherwise.
 bool is_valid_ip(std::string ip){
+    std::vector<std::string> parsedTokens;
+    std::string ipTemp = ip;
+    std::string parsingChar = ".";
+    int position = ipTemp.find(parsingChar);
+    size_t i = 0;
 
-    // Write your code here
-
+    while(position != ipTemp.npos)
+    {
+        parsedTokens.push_back(ipTemp.substr(0, position));
+        ipTemp.erase(0, position + parsingChar.length());
+        position = ipTemp.find(parsingChar);
+        if (position == ipTemp.npos)
+        {
+            parsedTokens.push_back(ipTemp.substr(0, position));
+        }
+        
+    }
+    if (parsedTokens.size() == 4)
+    {
+        while (i < parsedTokens.size() && all_of(parsedTokens[i].begin(), parsedTokens[i].end(), ::isdigit))
+        {
+            if (std::stoul(parsedTokens[i]) > 255)
+            {
+                break;
+            }
+            i++;
+        }
+    }
+    if (i == parsedTokens.size())
+    {
+        return true;
+    }
+    
     return false;
 }
 
