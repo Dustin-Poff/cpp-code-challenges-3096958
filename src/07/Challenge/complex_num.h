@@ -2,10 +2,14 @@
 #define COMPLEX_NUM_H
 
 #include <iostream>
+#include <cmath>
 
 class complex_num{
     
     // Write your code here
+    private:
+        double real;
+        double imaginary;
 
     public:
          complex_num(double = 0.0, double = 0.0);
